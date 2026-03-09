@@ -1,23 +1,27 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { AnimatePresence, motion } from "framer-motion";
 
-const NAV_BG = "rgba(15, 23, 42, 0.9)";
-const TEXT_COLOR = "#f8fafc";
-const ACCENT_COLOR = "#22c55e";
+const navItems = [
+  { key: "home", to: "/" },
+  { key: "about", to: "/about" },
+  { key: "events", to: "/events" },
+  { key: "join", to: "/join" },
+];
 
 function Navbar() {
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
-  const links = [
-    { to: "/", label: t("navbar.home") },
-    { to: "/events", label: t("navbar.events") },
-    { to: "/contact", label: t("navbar.contact") },
-  ];
-
   const currentLanguage = i18n.language?.toLowerCase().startsWith("zh") ? "zh" : "en";
+  const languageLabel = currentLanguage === "en" ? "中文" : "EN";
+
+  const links = useMemo(
+    () => navItems.map((item) => ({ ...item, label: t(`navbar.${item.key}`) })),
+    [t]
+  );
 
   const toggleLanguage = () => {
     i18n.changeLanguage(currentLanguage === "en" ? "zh" : "en");
@@ -28,114 +32,46 @@ function Navbar() {
   }, [location.pathname]);
 
   return (
-    <header style={styles.wrapper}>
-      <style>{`
-        .se-navbar-link {
-          color: ${TEXT_COLOR};
-          text-decoration: none;
-          font-size: 0.95rem;
-          letter-spacing: 0.02em;
-          transition: color 0.25s ease, opacity 0.25s ease;
-        }
-
-        .se-navbar-link:hover {
-          color: ${ACCENT_COLOR};
-        }
-
-        .se-navbar-link.active {
-          color: ${ACCENT_COLOR};
-          font-weight: 700;
-        }
-
-        .se-navbar-button {
-          border: 1px solid ${ACCENT_COLOR};
-          background: transparent;
-          color: ${TEXT_COLOR};
-          border-radius: 999px;
-          padding: 0.4rem 0.75rem;
-          font-size: 0.82rem;
-          cursor: pointer;
-          transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
-        }
-
-        .se-navbar-button:hover {
-          background: ${ACCENT_COLOR};
-          color: #0f172a;
-          transform: translateY(-1px);
-        }
-
-        .se-hamburger {
-          display: none;
-        }
-
-        .se-mobile-panel {
-          max-height: 0;
-          opacity: 0;
-          overflow: hidden;
-          transform: translateY(-6px);
-          transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .se-mobile-panel.open {
-          max-height: 320px;
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        @media (max-width: 900px) {
-          .se-desktop-nav,
-          .se-desktop-controls {
-            display: none !important;
-          }
-
-          .se-hamburger {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            border: 1px solid rgba(243, 244, 246, 0.25);
-            background: rgba(243, 244, 246, 0.05);
-            color: ${TEXT_COLOR};
-            cursor: pointer;
-            transition: background-color 0.25s ease, border-color 0.25s ease;
-          }
-
-          .se-hamburger:hover {
-            border-color: ${ACCENT_COLOR};
-            background: rgba(74, 222, 128, 0.1);
-          }
-        }
-
-        @media (min-width: 901px) {
-          .se-mobile-panel {
-            display: none;
-          }
-        }
-      `}</style>
-
-      <nav style={styles.container}>
-        <Link to="/" style={styles.brand}>
-          <span style={styles.logoText}>{t("brand.logo")}</span>
-          <span style={styles.subtitle}>{t("brand.subtitle")}</span>
+    <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-[rgba(13,27,42,0.85)] text-[#f3f4f6] backdrop-blur-md">
+      <nav className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
+        <Link to="/" className="group inline-flex items-end gap-2">
+          <span
+            className="text-3xl font-bold uppercase leading-none tracking-[0.08em]"
+            style={{ fontFamily: '"Bebas Neue Pro", "Bebas Neue", sans-serif' }}
+          >
+            STUDENT ENERGY
+          </span>
+          <span className="pb-1 text-xs uppercase tracking-[0.2em] text-slate-200/90">AT NCKU</span>
         </Link>
 
-        <div className="se-desktop-nav" style={styles.navLinks}>
-          {links.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={`se-navbar-link${location.pathname === item.to ? " active" : ""}`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
+        <div className="hidden items-center gap-7 md:flex">
+          {links.map((item) => {
+            const isActive = location.pathname === item.to;
 
-        <div className="se-desktop-controls" style={styles.controls}>
-          <button type="button" onClick={toggleLanguage} className="se-navbar-button">
-            {currentLanguage === "en" ? "\u4E2D\u6587" : "EN"}
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`relative pb-1 text-sm tracking-wide transition-colors duration-200 ${
+                  isActive ? "text-[#4ade80]" : "text-[#f3f4f6] hover:text-[#4ade80]"
+                }`}
+              >
+                {item.label}
+                <span
+                  className={`absolute bottom-0 left-0 h-0.5 w-full origin-left bg-[#4ade80] transition-transform duration-200 ${
+                    isActive ? "scale-x-100" : "scale-x-0"
+                  }`}
+                />
+              </Link>
+            );
+          })}
+
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="rounded-full border border-[#4ade80] px-3 py-1 text-xs font-semibold uppercase tracking-wider transition hover:bg-[#4ade80] hover:text-slate-900"
+          >
+            {languageLabel}
           </button>
         </div>
 
@@ -143,102 +79,53 @@ function Navbar() {
           type="button"
           aria-label={t("navbar.menu")}
           aria-expanded={isOpen}
-          className="se-hamburger"
           onClick={() => setIsOpen((prev) => !prev)}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 text-[#f3f4f6] transition hover:border-[#4ade80] hover:text-[#4ade80] md:hidden"
         >
-          {isOpen ? "X" : "="}
+          <span className="text-xl leading-none">{isOpen ? "X" : "="}</span>
         </button>
       </nav>
 
-      <div className={`se-mobile-panel${isOpen ? " open" : ""}`} style={styles.mobilePanel}>
-        <div style={styles.mobileLinksWrap}>
-          {links.map((item) => (
-            <Link
-              key={`mobile-${item.to}`}
-              to={item.to}
-              className={`se-navbar-link${location.pathname === item.to ? " active" : ""}`}
-              style={styles.mobileLink}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <button type="button" onClick={toggleLanguage} className="se-navbar-button" style={styles.mobileLangBtn}>
-            {currentLanguage === "en" ? "\u4E2D\u6587" : "EN"}
-          </button>
-        </div>
-      </div>
+      <AnimatePresence>
+        {isOpen ? (
+          <motion.div
+            key="mobile-menu"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="overflow-hidden border-t border-white/10 bg-[rgba(13,27,42,0.92)] md:hidden"
+          >
+            <div className="mx-auto grid w-full max-w-6xl gap-2 px-4 py-4 sm:px-6">
+              {links.map((item) => {
+                const isActive = location.pathname === item.to;
+
+                return (
+                  <Link
+                    key={`mobile-${item.to}`}
+                    to={item.to}
+                    className={`rounded-md px-2 py-2 text-sm transition ${
+                      isActive ? "text-[#4ade80] underline decoration-[#4ade80] underline-offset-4" : "hover:text-[#4ade80]"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+
+              <button
+                type="button"
+                onClick={toggleLanguage}
+                className="mt-1 w-fit rounded-full border border-[#4ade80] px-3 py-1 text-xs font-semibold uppercase tracking-wider transition hover:bg-[#4ade80] hover:text-slate-900"
+              >
+                {languageLabel}
+              </button>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   );
 }
 
-const styles = {
-  wrapper: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    zIndex: 1000,
-    background: NAV_BG,
-    backdropFilter: "blur(12px)",
-    WebkitBackdropFilter: "blur(12px)",
-    borderBottom: "1px solid rgba(243, 244, 246, 0.15)",
-  },
-  container: {
-    maxWidth: "1120px",
-    margin: "0 auto",
-    padding: "0.8rem 1rem",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "1rem",
-  },
-  brand: {
-    display: "flex",
-    flexDirection: "column",
-    textDecoration: "none",
-    color: TEXT_COLOR,
-    lineHeight: 1,
-  },
-  logoText: {
-    letterSpacing: "0.08em",
-    fontSize: "1.2rem",
-    fontWeight: 700,
-  },
-  subtitle: {
-    fontSize: "0.72rem",
-    letterSpacing: "0.18em",
-    opacity: 0.92,
-    marginTop: "0.1rem",
-  },
-  navLinks: {
-    display: "flex",
-    alignItems: "center",
-    gap: "1.25rem",
-  },
-  controls: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.6rem",
-  },
-  mobilePanel: {
-    borderTop: "1px solid rgba(243, 244, 246, 0.15)",
-    background: "rgba(15, 23, 42, 0.95)",
-  },
-  mobileLinksWrap: {
-    maxWidth: "1120px",
-    margin: "0 auto",
-    padding: "0.75rem 1rem 1rem",
-    display: "grid",
-    gap: "0.8rem",
-  },
-  mobileLink: {
-    fontSize: "1rem",
-  },
-  mobileLangBtn: {
-    justifySelf: "start",
-    marginTop: "0.25rem",
-  },
-};
-
 export default Navbar;
-

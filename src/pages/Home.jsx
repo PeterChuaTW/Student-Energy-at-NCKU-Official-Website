@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Spline from "@splinetool/react-spline";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -48,8 +48,8 @@ function Home() {
         <div style={styles.heroContent}>
           <h1 style={styles.title}>{t("home.heroTitle")}</h1>
           <p style={styles.subtitle}>{t("home.heroSubtitle")}</p>
-          <Link to="/contact" style={styles.ctaButton}>
-            {t("home.contactButton")}
+          <Link to="/join" style={styles.ctaButton}>
+            {t("home.joinButton")}
           </Link>
         </div>
       </section>

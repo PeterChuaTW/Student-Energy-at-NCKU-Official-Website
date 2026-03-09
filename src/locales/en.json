@@ -1,14 +1,10 @@
-{
+﻿{
   "navbar": {
     "home": "Home",
+    "about": "About",
     "events": "Events",
-    "contact": "Contact",
+    "join": "Join Us",
     "menu": "Menu"
-  },
-  "nav": {
-    "home": "Home",
-    "events": "Events",
-    "contact": "Contact"
   },
   "brand": {
     "logo": "STUDENT ENERGY",
@@ -17,27 +13,19 @@
   "home": {
     "heroTitle": "Empowering the Next Generation of Energy Leaders",
     "heroSubtitle": "Taiwan's first Student Energy Global chapter at NCKU",
-    "hero_title": "Empowering the Next Generation of Energy Leaders",
-    "hero_subtitle": "Taiwan's first Student Energy Global chapter at NCKU",
-    "contactButton": "Contact Us",
-    "contact_button": "Contact Us"
+    "joinButton": "Join Us"
   },
   "about": {
     "title": "About Student Energy at NCKU",
-    "description": "We connect students with practical opportunities, events, and mentorship to accelerate the energy transition in Taiwan.",
-    "mission": "Empowering students to drive sustainable energy education and development"
+    "description": "We connect students with practical opportunities, events, and mentorship to accelerate the energy transition in Taiwan."
   },
   "events": {
     "title": "Club Events & Activities",
-    "subtitle": "Explore workshops, talks, and networking experiences hosted by our chapter.",
-    "upcomingTitle": "Upcoming Events",
-    "upcoming": "Upcoming",
-    "past": "Past Events"
+    "subtitle": "Explore workshops, talks, and networking experiences hosted by our chapter."
   },
-  "contact": {
-    "title": "Contact Us",
-    "subtitle": "Have a question or want to collaborate? Fill out the form below.",
-    "button": "Open Contact Form"
+  "join": {
+    "title": "Join Us",
+    "subtitle": "Build leadership and impact in the future of sustainable energy."
   },
   "footer": {
     "rights": "All rights reserved"
