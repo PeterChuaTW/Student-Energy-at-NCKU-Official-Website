@@ -1,0 +1,32 @@
+﻿[
+  {
+    "id": "green-tech-forum-2026",
+    "titleKey": "event1_title",
+    "date": "2026-04-11",
+    "status": "upcoming",
+    "descKey": "event1_desc",
+    "image": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800",
+    "formUrl": "https://forms.google.com",
+    "tags": ["Forum", "Green Tech", "AI"]
+  },
+  {
+    "id": "energy-talk-2025",
+    "titleKey": "event2_title",
+    "date": "2025-11-22",
+    "status": "past",
+    "descKey": "event2_desc",
+    "image": "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800",
+    "formUrl": null,
+    "tags": ["Talk", "Industry"]
+  },
+  {
+    "id": "sustainability-workshop-2025",
+    "titleKey": "event3_title",
+    "date": "2025-06-15",
+    "status": "past",
+    "descKey": "event3_desc",
+    "image": "https://images.unsplash.com/photo-1569163139599-0f4517e36f51?w=800",
+    "formUrl": null,
+    "tags": ["Workshop", "Sustainability"]
+  }
+]
