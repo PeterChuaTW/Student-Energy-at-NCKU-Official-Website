@@ -4,7 +4,7 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 ## Project Guides
 
-- Typography rules and font usage: [TYPOGRAPHY.md](./TYPOGRAPHY.md)
+- Official brand system (colors, typography, design rules): [BRAND_SYSTEM.md](./BRAND_SYSTEM.md)
 - Runtime debugging and white-screen prevention: [DEBUGGING.md](./DEBUGGING.md)
 - PR safety checklist for Home/Hero/Navbar changes: [PR_CHECKLIST.md](./PR_CHECKLIST.md)
 
@@ -20,3 +20,5 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
