@@ -3,9 +3,90 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 
+@font-face {
+  font-family: 'Bebas Neue Pro';
+  src: url('/fonts/Bebas Neue Pro Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bebas Neue Pro';
+  src: url('/fonts/Bebas Neue Pro Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bebas Neue Pro';
+  src: url('/fonts/Bebas Neue Pro Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('/fonts/SourceSansPro-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('/fonts/SourceSansPro-LightIt.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('/fonts/SourceSansPro-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('/fonts/SourceSansPro-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('/fonts/SourceSansPro-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('/fonts/SourceSansPro-BoldIt.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --color-blue: #317DB2;
+  --color-green: #ABC737;
+  --color-snow: #FDFEFC;
+  --color-sdg7: #F9B817;
+  --color-alert: #F04B58;
+  --color-bg-deep: #0d1b2a;
+  --color-bg-section: #16213e;
+  --color-bg-card: #1a2744;
+
   font-family: "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -54,9 +135,12 @@
 }
 
 body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+  color: #FDFEFC;
+  background-color: #0d1b2a;
   margin: 0;
   min-width: 320px;
-  background: #ffffff;
 }
 
 a {
@@ -70,7 +154,7 @@ a {
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.87 0.00 0);
+  --primary: oklch(0.87 0 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -144,9 +228,9 @@ a {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    color: #FDFEFC;
+    background-color: #0d1b2a;
   }
 }
